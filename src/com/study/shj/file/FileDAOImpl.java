@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+
 @RequiredArgsConstructor
 public class FileDAOImpl implements FileDAO {
 
@@ -15,11 +17,11 @@ public class FileDAOImpl implements FileDAO {
     private final SqlSessionFactory sqlSessionFactory;
 
     @Override
-    public int addFile(FileVO fileVO) {
+    public int addFile(HashMap hashMap) {
 
         try (SqlSession sqlSession = sqlSessionFactory.openSession(true)) {
             System.out.println(sqlSessionFactory);
-            sqlSession.insert("File.insert", fileVO);
+            sqlSession.insert("File.insert", hashMap);
         } catch (Exception e) {
             e.printStackTrace();
         }

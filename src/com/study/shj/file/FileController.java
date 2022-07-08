@@ -4,6 +4,12 @@ import com.study.shj.annotation.Controller;
 import com.study.shj.annotation.FileMapping;
 import lombok.RequiredArgsConstructor;
 
+/**
+ *  파일 컨트롤러 클래스
+ *
+ * @version : 1.0.0
+ * @author : SHJ
+ */
 @RequiredArgsConstructor
 @Controller
 public class FileController {

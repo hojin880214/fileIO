@@ -12,25 +12,20 @@ import java.io.Reader;
 @RequiredArgsConstructor
 public enum MyBatisConnectionFactoryEnum {
     INSTANCE;
-    private SqlSessionFactory sqlSessionFactory;
+    private static SqlSessionFactory sqlSessionFactory;
 
-    @PostConstruct
-    private void initialize() {
-        try {
-            System.out.println("11111111111111111111111111111111111111111");
-            String resource = "mybatis_config.xml";
-            Reader reader = Resources.getResourceAsReader(resource);
-
-//            if (sqlSessionFactory == null) {
+    static {
+        String resource = "mybatis_config.xml";
+        try (Reader reader = Resources.getResourceAsReader(resource)){
+            if (sqlSessionFactory == null) {
                 sqlSessionFactory = new SqlSessionFactoryBuilder().build(reader);
-//            }
+            }
         }
         catch (IOException iOException) {
             iOException.printStackTrace();
         }
-
     }
-    public SqlSessionFactory getSqlSessionFactory() {
+    public static SqlSessionFactory getSqlSessionFactory() {
         return sqlSessionFactory;
     }
 }

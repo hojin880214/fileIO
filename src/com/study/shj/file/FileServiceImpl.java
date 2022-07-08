@@ -1,13 +1,11 @@
 package com.study.shj.file;
 
-import com.study.shj.annotation.Controller;
-import com.study.shj.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.HashMap;
 import java.util.Scanner;
 
 @RequiredArgsConstructor
@@ -26,15 +24,17 @@ public class FileServiceImpl implements FileService {
         String fileName = getScannerFileName();
         String fileFullPath = projectPath + "\\file\\" + fileName + ".txt";
         String fileContent = getFileContent(fileFullPath);
-        FileVO fileVO = new FileVO(fileFullPath,fileName,fileContent);
-        fileDAO.addFile(fileVO);
+        HashMap<String,String> hashMap = new HashMap();
+        hashMap.put("fileName",fileName);
+        hashMap.put("fileFullPath",fileFullPath);
+        hashMap.put("fileContent",fileContent);
+        fileDAO.addFile(hashMap);
 
     }
 
     @Override
     public void readFile(){
 
-        System.out.println("readFile");
         fileDAO.readFile();
 
     }
@@ -56,11 +56,11 @@ public class FileServiceImpl implements FileService {
                 BufferedWriter bw = new BufferedWriter(fw)
         ) {
             LOGGER.info(fileFullPath + " 이 생성되었습니다.");
-            LOGGER.info("파일 내용을 입력해주세요.(입력 종료는 개행 후 :q 입력해주세요)" + System.lineSeparator());
+            LOGGER.info("파일 내용을 입력해주세요.(입력 종료는 개행 후 :wq! 입력해주세요)" + System.lineSeparator());
             while (true) {
                 System.out.print(" " + ++lineNumber + " ");
                 String line = scanner.nextLine();
-                if((line.equals(":q"))) break;
+                if((line.equals(":wq!"))) break;
                 fileContent = fileContent.concat(line + System.lineSeparator());
                 bw.write(line);
                 bw.newLine();

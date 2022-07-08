@@ -3,7 +3,7 @@ package com.study.shj;
 import com.study.shj.menu.FileIOMenu;
 
 /**
- *  파일 입출력 메인클래스
+ *  파일 입출력 메인 클래스
  *
  * @version : 1.0.0
  * @author : SHJ
@@ -11,7 +11,7 @@ import com.study.shj.menu.FileIOMenu;
 public class Main {
 
     /**
-     *  <p>파일 입출력 메인함수</p>
+     *  <p>파일 입출력 메인 함수</p>
      *  <p>파일 메뉴를 보여주고 사용할 메뉴 번호를 입력하여 작동</p>
      *  <p>while 문으로 계속 반복하고 나가기 선택했을 때 break 로 종료</p>
      *

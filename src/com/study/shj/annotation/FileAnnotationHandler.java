@@ -3,6 +3,7 @@ package com.study.shj.annotation;
 import com.study.shj.file.FileDAOImpl;
 import com.study.shj.file.FileServiceImpl;
 import com.study.shj.myBatis.MyBatisConnectionFactory;
+import com.study.shj.myBatis.MyBatisConnectionFactoryEnum;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -25,7 +26,7 @@ public class FileAnnotationHandler {
                     FileMapping fileMapping = method.getDeclaredAnnotation(FileMapping.class);
                     if(!(num == fileMapping.menuNumber())) return;
                     Constructor constructor = clazz.getConstructor(constructorParameterTypes);
-                    FileDAOImpl fileDAOImpl = new FileDAOImpl(MyBatisConnectionFactory.getSqlSessionFactory());
+                    FileDAOImpl fileDAOImpl = new FileDAOImpl(MyBatisConnectionFactoryEnum.INSTANCE.getSqlSessionFactory());
                     FileServiceImpl fileServiceImpl = new FileServiceImpl(fileDAOImpl);
                     method.invoke(constructor.newInstance(fileServiceImpl));
                 }
