@@ -87,8 +87,8 @@ public class FileServiceImpl implements FileService {
     public void makeTextFileList() {
 
         File dir = new File(fileDirectory);
-        if(!dir.exists()){
-            dir.mkdir();
+        if(dir.mkdirs()){
+            LOGGER.info(fileDirectory + "폴더 생성완료");
         }
         FilenameFilter filter = (f, name) -> name.contains("txt");
         File[] files = dir.listFiles(filter);
