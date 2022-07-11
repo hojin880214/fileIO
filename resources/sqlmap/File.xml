@@ -7,6 +7,9 @@
 
     <insert id="insert" parameterType="java.util.HashMap">
         insert into em.newtable (filefullpath,filename,filecontent) values (#{fileFullPath},#{fileName},#{fileContent})
+<!--        <selectKey keyProperty="seq" resultType="int">-->
+<!--            SELECT last_value FROM em.testseq;-->
+<!--        </selectKey>-->
     </insert>
 
     <select id="selectList" resultType="java.util.HashMap">

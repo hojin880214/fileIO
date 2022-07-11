@@ -1,11 +1,10 @@
 package com.study.shj.file;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public interface FileDAO {
 
-    int addFile(HashMap hashMap);
+    int addFile(Map<String,String> hashMap);
     void readFile();
 //    void addFileList(FileVO fileVO);
 //    void printFileList();

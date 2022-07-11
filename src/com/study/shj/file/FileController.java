@@ -21,4 +21,10 @@ public class FileController {
         fileService.addFile();
     }
 
+    @FileMapping(menuNumber = 2)
+    public void readFile(){
+        fileService.makeTextFileList();
+        fileService.readFile();
+    }
+
 }

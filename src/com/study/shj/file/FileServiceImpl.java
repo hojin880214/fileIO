@@ -3,10 +3,11 @@ package com.study.shj.file;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.util.HashMap;
-import java.util.Scanner;
+
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
@@ -16,19 +17,27 @@ public class FileServiceImpl implements FileService {
     private final FileDAO fileDAO;
 
     private final String projectPath = System.getProperty("user.dir");
+    private final String fileDirectory = projectPath + "\\file\\";
     Scanner scanner = new Scanner(System.in);
 
     @Override
     public void addFile(){
 
         String fileName = getScannerFileName();
-        String fileFullPath = projectPath + "\\file\\" + fileName + ".txt";
+        String fileFullPath = fileDirectory + fileName + ".txt";
         String fileContent = getFileContent(fileFullPath);
-        HashMap<String,String> hashMap = new HashMap();
+        Map<String,String> hashMap = new HashMap<>();
         hashMap.put("fileName",fileName);
         hashMap.put("fileFullPath",fileFullPath);
         hashMap.put("fileContent",fileContent);
-        fileDAO.addFile(hashMap);
+        int resultIntVal = fileDAO.addFile(hashMap);
+        if( resultIntVal != 1 ){
+            try {
+                Files.delete(Paths.get(fileFullPath));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
     }
 
@@ -71,6 +80,23 @@ public class FileServiceImpl implements FileService {
         LOGGER.info(System.lineSeparator() + fileFullPath + "의 내용 입력을 완료하였습니다." + System.lineSeparator());
 
         return fileContent;
+
+    }
+
+    @Override
+    public void makeTextFileList() {
+
+        File dir = new File(fileDirectory);
+        if(!dir.exists()){
+            dir.mkdir();
+        }
+        FilenameFilter filter = (f, name) -> name.contains("txt");
+        File[] files = dir.listFiles(filter);
+        List<String> textFileList = new ArrayList<>();
+        textFileList.clear();
+        for (File file : Objects.requireNonNull(files)) {
+            textFileList.add(file.toString());
+        }
 
     }
 
