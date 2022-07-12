@@ -7,10 +7,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 
-
 public class FileAnnotationHandler {
 
-        public void handleFileAnnotation(int num){
+    public void handleFileAnnotation(int num){
 
         try{
             Class<?> clazz = Class.forName("com.study.shj.file.FileController");
