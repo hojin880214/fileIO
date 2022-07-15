@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 
@@ -18,6 +19,12 @@ public class FileServiceImpl implements FileService {
     private final String projectPath = System.getProperty("user.dir");
     private final String fileDirectory = projectPath + "\\file\\";
     Scanner scanner = new Scanner(System.in);
+    // final 인데 List clear 하고 데이터 넣어도 되는 이유 궁금
+    private final List<String> textFileList = new ArrayList<>();
+
+    public static final String RESET = "\u001B[0m";
+    public static final String FONT_BLACK = "\u001B[30m";
+    public static final String BACKGROUND_GREEN = "\u001B[42m";
 
     @Override
     public void addFile(){
@@ -37,13 +44,6 @@ public class FileServiceImpl implements FileService {
                 e.printStackTrace();
             }
         }
-
-    }
-
-    @Override
-    public void readFile(){
-
-        fileDAO.readFile();
 
     }
 
@@ -91,7 +91,6 @@ public class FileServiceImpl implements FileService {
         }
         FilenameFilter filter = (f, name) -> name.contains("txt");
         File[] files = dir.listFiles(filter);
-        List<String> textFileList = new ArrayList<>();
         textFileList.clear();
         for (File file : Objects.requireNonNull(files)) {
             textFileList.add(file.toString());
@@ -99,4 +98,54 @@ public class FileServiceImpl implements FileService {
 
     }
 
+    @Override
+    public void showTextFileList() {
+
+        System.out.println(System.lineSeparator() + "----------------------파일목록-------------------------");
+        textFileList.forEach(String -> System.out.println((textFileList.indexOf(String)) + 1 + ". " + String.substring(String.lastIndexOf("\\") + 1)));
+        System.out.println("------------------------------------------------------");
+
+    }
+
+    @Override
+    public int textFileMaxIndex() {
+        return textFileList.size();
+    }
+
+    @Override
+    public void readTextFileList(int selectedNumber) {
+
+        int lineNumber = 0;
+        try {
+            Path path = Paths.get(textFileList.get(selectedNumber - 1));
+            List<String> allLines = Files.readAllLines(path);
+            System.out.println(System.lineSeparator() + path);
+            System.out.println("------------------------------------------------------");
+            System.out.println("------------------------------------------------------");
+            for (String line : allLines) {
+                System.out.println(RESET + " " + ++lineNumber + " " + BACKGROUND_GREEN + FONT_BLACK + " " + line);
+            }
+            System.out.println(RESET + "------------------------------------------------------");
+            System.out.println("------------------------------------------------------" + System.lineSeparator());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    public void selectTextFile(){
+
+        int textFileMaxIndex = textFileMaxIndex();
+        System.out.print("읽을 파일 번호를 입력해주세요 : ");
+        while (true) {
+            int selectedNumber = scanner.nextInt();
+            if(textFileMaxIndex >= selectedNumber){
+                readTextFileList(selectedNumber);
+                break;
+            }
+            System.err.print("해당하는 번호가 없습니다. 읽을 파일 번호를 다시 입력해주세요 : ");
+        }
+
+    }
 }

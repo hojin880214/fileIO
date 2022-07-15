@@ -22,9 +22,10 @@ public class FileController {
     }
 
     @FileMapping(menuNumber = 2)
-    public void readFile(){
+    public void readFile() {
         fileService.makeTextFileList();
-        fileService.readFile();
+        fileService.showTextFileList();
+        fileService.selectTextFile();
     }
 
 }

@@ -20,7 +20,6 @@ public class FileIOMenu {
     /**
      *  <p>파일 입출력 메뉴 출력 함수</p>
      *
-     * @version : 1.0.0
      * @author : SHJ
      */
     public void printFileIOMenu() {
@@ -40,7 +39,6 @@ public class FileIOMenu {
     /**
      *  <p>선택한 번호 유효성 체크하여 잘못된 번호 입력 시 번호 다시 입력 받도록 재귀</p>
      *
-     * @version : 1.0.0
      * @author : SHJ
      * @exception : InputMismatchException
      * @return int
@@ -58,10 +56,9 @@ public class FileIOMenu {
     /**
      *  <p>사용자가 선택한 번호로 메뉴 실행하는 함수</p>
      *  <p>어노테이션핸들러를 통해 해당 컨트롤러 호출</p>
-     *
-     * @version : 1.0.0
+r     *
      * @author : SHJ
-     * @param number 사용자가 선택한 번호
+     * @param selectedNumber 사용자가 선택한 번호
      * @return bool
      */
     public boolean selectFileIOMenu(int selectedNumber) {
@@ -88,7 +85,6 @@ public class FileIOMenu {
      *  <p>스캐너로 파일 입출력 메뉴 번호 선택</p>
      *  <p>숫자 외에 다른 것을 입력했을 때 숫자를 입력하도록 함수를 다시 실행 (재귀)<p/>
      *
-     * @version : 1.0.0
      * @author : SHJ
      * @exception : InputMismatchException
      * @return int
@@ -112,7 +108,6 @@ public class FileIOMenu {
     /**
      *  <p>입력 받은 번호가 메뉴 번호에 있는지 bool 값으로 리턴</p>
      *
-     * @version : 1.0.0
      * @author : SHJ
      * @param number 스캐너로 입력받은 메뉴번호
      * @return bool
