@@ -7,6 +7,6 @@ public interface FileService {
     void showTextFileList();
     int textFileMaxIndex();
     void readTextFileList(int selectedNumber);
-
     void selectTextFile();
+
 }

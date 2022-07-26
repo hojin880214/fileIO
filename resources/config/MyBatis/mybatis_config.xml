@@ -4,14 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
 <configuration>
+    <properties resource="db.properties"/>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
-                <property name="driver" value="org.postgresql.Driver"/>
-                <property name="url" value="jdbc:postgresql://172.18.2.231:5444/klhsb"/>
-                <property name="username" value="enterprisedb"/>
-                <property name="password" value="ppas0411"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
         <environment id="production">
