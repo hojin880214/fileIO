@@ -4,7 +4,7 @@ import com.formdev.flatlaf.FlatDarculaLaf;
 
 import javax.swing.*;
 
-public class MainSwingExeEx {
+public class MainSwingEx {
 
     public static void main(String[] args) {
 
@@ -13,7 +13,7 @@ public class MainSwingExeEx {
         }catch (Exception e){
             e.printStackTrace();
         }
-        new BizMapDBFrame();
+        new SwingEx();
 
     }
 }
